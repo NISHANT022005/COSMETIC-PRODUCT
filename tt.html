@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>COSMETIC PRODUCTS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #fff;
+            color: #222;
+            transition: background 0.3s, color 0.3s;
+        }
+        .dark-theme {
+            background: #222;
+            color: #fff;
+        }
+        .toggle-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            outline: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+        .circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #eee;
+            border: 2px solid #888;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: background 0.3s, border 0.3s;
+        }
+        .dark-theme .circle {
+            background: #444;
+            border: 2px solid #fff;
+        }
+        header {
+            background: linear-gradient(90deg, #f8b6d2 0%, #f6e7fa 100%);
+            padding: 40px 0 20px 0;
+            text-align: center;
+        }
+        .dark-theme header {
+            background: linear-gradient(90deg, #3a2c3a 0%, #222 100%);
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #d72660;
+            letter-spacing: 2px;
+        }
+        nav {
+            margin-top: 20px;
+        }
+        nav a {
+            color: #d72660;
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #222;
+        }
+        .dark-theme nav a {
+            color: #f8b6d2;
+        }
+        .dark-theme nav a:hover {
+            color: #fff;
+        }
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 10px 30px 10px;
+            background: #fff;
+        }
+        .dark-theme .hero {
+            background: #222;
+        }
+        .hero-text {
+            max-width: 500px;
+            margin-right: 40px;
+        }
+        .hero-title {
+            font-size: 2.5rem;
+            color: #d72660;
+            margin-bottom: 18px;
+        }
+        .hero-desc {
+            font-size: 1.2rem;
+            margin-bottom: 28px;
+        }
+        .cta-btn {
+            background: #d72660;
+            color: #fff;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(215,38,96,0.15);
+            transition: background 0.2s;
+        }
+        .cta-btn:hover {
+            background: #a81e4d;
+        }
+        .hero-img {
+            max-width: 320px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 4px 24px rgba(215,38,96,0.10);
+        }
+        .products-section {
+            padding: 40px 10px 60px 10px;
+            background: #f6e7fa;
+            text-align: center;
+        }
+        .dark-theme .products-section {
+            background: #2d2233;
+        }
+        .products-title {
+            font-size: 2rem;
+            color: #d72660;
+            margin-bottom: 30px;
+        }
+        .products-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            width: 220px;
+            padding: 22px 16px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(215,38,96,0.13);
+        }
+        .product-img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 14px;
+            border: 2px solid #f8b6d2;
+        }
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #d72660;
+        }
+        .product-desc {
+            font-size: 0.98rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            font-size: 1.05rem;
+            color: #222;
+            font-weight: bold;
+        }
+        .dark-theme .product-card {
+            background: #3a2c3a;
+            color: #fff;
+        }
+        .dark-theme .product-name {
+            color: #f8b6d2;
+        }
+        .dark-theme .product-desc {
+            color: #e0cbe6;
+        }
+        .dark-theme .product-price {
+            color: #fff;
+        }
+        footer {
+            background: #d72660;
+            color: #fff;
+            text-align: center;
+            padding: 18px 0;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+        }
+        @media (max-width: 600px) {
+            .products-grid {
+                flex-direction: column;
+                gap: 18px;
+            }
+            .product-card {
+                width: 95%;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleTheme()" title="Toggle dark mode">
+        <span class="circle">&#9679;</span>
+    </button>
+<!-- Add this inside <body> just before <header> -->
+<button class="login-icon-btn" onclick="openModal('login')" title="Sign In" style="position:absolute;top:30px;right:30px;z-index:20;">
+    <span class="login-circle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;">
+            <circle cx="12" cy="12" r="11" stroke="#d72660" stroke-width="2" fill="#fff"/>
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#d72660"/>
+        </svg>
+    </span>
+</button>
+
+<!-- Modal for Login/Signup -->
+<div id="modal" class="modal">
+    <div class="modal-content" id="modal-content"></div>
+</div>
+
+
+    <header>
+        <div class="logo">COSMETIC AND PRODUCTS</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <script>
+function openModal(type) {
+    const modal = document.getElementById('modal');
+    const content = document.getElementById('modal-content');
+    if (type === 'login') {
+        content.innerHTML = `
+            <button class="close" onclick="closeModal()">&times;</button>
+            <h2>Sign In</h2>
+            <input id="login-username" type="text" placeholder="Username" />
+            <input id="login-password" type="password" placeholder="Password" />
+            <button onclick="loginUser()">Sign In</button>
+            <button class="switch-link" onclick="openModal('signup')">Don't have an account? Sign Up</button>
+            <div id="login-msg" style="color:#d72660;margin-top:10px;"></div>
+        `;
+    } else if (type === 'signup') {
+        content.innerHTML = `
+            <button class="close" onclick="closeModal()">&times;</button>
+            <h2>Sign Up</h2>
+            <input id="signup-username" type="text" placeholder="Username" />
+            <input id="signup-email" type="email" placeholder="Email" />
+            <input id="signup-password" type="password" placeholder="Password" />
+            <button onclick="signupUser()">Sign Up</button>
+            <button class="switch-link" onclick="openModal('login')">Already have an account? Sign In</button>
+            <div id="signup-msg" style="color:#d72660;margin-top:10px;"></div>
+        `;
+    }
+    modal.style.display = 'block';
+}
+function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+}
+window.onclick = function(event) {
+    const modal = document.getElementById('modal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+</script>
+
+<script>
+function signupUser() {
+    const username = document.getElementById('signup-username').value;
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
+    fetch('/api/signup', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username, email, password})
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById('signup-msg').innerText = data.message;
+        if(data.success) setTimeout(closeModal, 1000);
+    });
+}
+
+// Login function: sends login info to backend
+function loginUser() {
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+    fetch('/api/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username, password})
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById('login-msg').innerText = data.message;
+        if(data.success) setTimeout(closeModal, 1000);
+    });
+}
+  </script>  
+
+    <section class="hero">
+        <div class="hero-text">
+            <div class="hero-title">Unleash Your Natural Glow</div>
+            <div class="hero-desc">
+                Discover premium, cruelty-free cosmetics designed to enhance your beauty. Shop our bestsellers and experience the GlowUp difference!
+            </div>
+            <button class="cta-btn">Shop Now</button>
+        </div>
+        <img class="hero-img" src="IMG-20240920-WA0010.jpg">
+    </section>
+    <section class="products-section">
+        <div class="products-title">Our Bestsellers</div>
+        <div class="products-grid">
+            <div class="product-card">
+                <img class="product-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=200&q=80" alt="Lipstick">
+                <div class="product-name">Velvet Matte Lipstick</div>
+                <div class="product-desc">Rich color, long-lasting, non-drying formula.</div>
+                <div class="product-price">$18</div>
+            </div>
+            <div class="product-card">
+                <img class="product-img" src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=200&q=80" alt="Foundation">
+                <div class="product-name">Radiant Glow Foundation</div>
+                <div class="product-desc">Lightweight, buildable coverage for all skin types.</div>
+                <div class="product-price">$28</div>
+            </div>
+            <div class="product-card">
+                <img class="product-img" src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=200&q=80" alt="Blush">
+                <div class="product-name">Peachy Blush</div>
+                <div class="product-desc">Natural flush with a silky smooth finish.</div>
+                <div class="product-price">$16</div>
+            </div>
+            <div class="product-card">
+                <img class="product-img" src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=200&q=80" alt="Mascara">
+                <div class="product-name">Lash Lift Mascara</div>
+                <div class="product-desc">Volumizes and lengthens for dramatic lashes.</div>
+                <div class="product-price">$20</div>
+            </div>
+        </div>
+    </section>
+    <footer>
+    &copy; 2025 GlowUp Cosmetics. All rights reserved.
+    <div style="margin-top:10px;">
+        <a href="https://instagram.com/" target="_blank" style="margin:0 10px; color:#dc3106b0; text-decoration:none; font-size:1.3em;" title="Instagram">
+            <!-- Instagram SVG -->
+            <svg width="22" height="22" viewBox="0 0 448 512" style="vertical-align:middle;"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.7 141 224.1 141zm0 186c-39.5 0-71.5-32-71.5-71.5s32-71.5 71.5-71.5 71.5 32 71.5 71.5-32 71.5-71.5 71.5zm146.4-194.3c0 14.9-12 26.9-26.9 26.9s-26.9-12-26.9-26.9 12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.3-9.9-66.7-36.2-92.9S388.6 1.7 353.3 0C317.8-1.7 282.2-1.7 246.7 0c-35.3 1.7-66.7 9.9-92.9 36.2S1.7 123.4 0 158.7C-1.7 194.2-1.7 229.8 0 265.3c1.7 35.3 9.9 66.7 36.2 92.9s57.6 34.5 92.9 36.2c35.5 1.7 71.1 1.7 106.6 0 35.3-1.7 66.7-9.9 92.9-36.2s34.5-57.6 36.2-92.9c1.7-35.5 1.7-71.1 0-106.6zM398.8 388c-7.8 19.6-22.9 34.7-42.5 42.5-29.4 11.7-99.2 9-132.3 9s-102.9 2.6-132.3-9c-19.6-7.8-34.7-22.9-42.5-42.5-11.7-29.4-9-99.2-9-132.3s-2.6-102.9 9-132.3c7.8-19.6 22.9-34.7 42.5-42.5C121.1 9 190.9 11.6 224 11.6s102.9-2.6 132.3 9c19.6 7.8 34.7 22.9 42.5 42.5 11.7 29.4 9 99.2 9 132.3s2.6 102.9-9 132.3z"/></svg>
+        </a>
+        <a href="https://telegram.org/" target="_blank" style="margin:0 10px; color:#363bc3; text-decoration:none; font-size:1.3em;" title="Telegram">
+            <!-- Telegram SVG -->
+            <svg width="22" height="22" viewBox="0 0 496 512" style="vertical-align:middle;"><path fill="currentColor" d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm104.7 169.1l-36.5 172.2c-2.7 12.1-9.8 15.1-19.8 9.4l-55-40.5-26.5 25.5c-2.9 2.9-5.3 5.3-10.8 5.3l3.9-55.3 100.8-91c4.4-3.9-1-6.1-6.8-2.2l-124.6 78.4-53.7-16.8c-11.7-3.7-11.9-11.7 2.4-17.3l209.6-80.9c9.8-3.7 18.4 2.2 15.3 17.2z"/></svg>
+        </a>
+        <a href="https://www.threads.net/" target="_blank" style="margin:0 10px; color:#050404; text-decoration:none; font-size:1.3em;" title="Threads">
+            <!-- Threads SVG -->
+            <svg width="22" height="22" viewBox="0 0 448 512" style="vertical-align:middle;"><path fill="currentColor" d="M224 32C100.3 32 0 132.3 0 256s100.3 224 224 224 224-100.3 224-224S347.7 32 224 32zm0 400c-97.2 0-176-78.8-176-176S126.8 80 224 80s176 78.8 176 176-78.8 176-176 176zm0-272c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm0 160c-35.3 0-64-28.7-64-64s28.7-64 64-64 64 28.7 64 64-28.7 64-64 64z"/></svg>
+        </a>
+        <a href="https://facebook.com/" target="_blank" style="margin:0 10px; color:#1125ac; text-decoration:none; font-size:1.3em;" title="Facebook">
+            <!-- Facebook SVG -->
+            <svg width="22" height="22" viewBox="0 0 320 512" style="vertical-align:middle;"><path fill="currentColor" d="M279.14 288l14.22-92.66h-88.91V127.91c0-25.35 12.42-50.06 52.24-50.06H293V6.26S259.5 0 225.36 0c-73.22 0-121.09 44.38-121.09 124.72v70.62H22.89V288h81.38v224h100.2V288z"/></svg>
+        </a>
+        <a href="https://wa.me/" target="_blank" style="margin:0 10px; color:#37c430; text-decoration:none; font-size:1.3em;" title="WhatsApp">
+            <!-- WhatsApp SVG -->
+            <svg width="22" height="22" viewBox="0 0 448 512" style="vertical-align:middle;"><path fill="currentColor" d="M380.9 97.1C339-2.6 221.2-31.8 132.1 29.2c-89.1 61-118.3 178.8-57.3 267.9l-25.5 92.7c-4.5 16.3 11.3 31.1 27.6 26.6l92.7-25.5c89.1 61 206.9 31.9 267.9-57.3 61-89.1 31.8-206.9-57.3-267.9zm-17.6 251.1c-47.5 67.2-137.7 87.1-204.9 39.6l-6.1-4.2-54.9 15.1 15.1-54.9-4.2-6.1c-47.5-67.2-27.6-157.4 39.6-204.9 67.2-47.5 157.4-27.6 204.9 39.6 47.5 67.2 27.6 157.4-39.6 204.9zm-99.3-61.7c-13.2-6.6-28.2-13.6-40.2-22.6-12-9-22.6-19.6-31.6-31.6-9-12-16-27-22.6-40.2-6.6-13.2-13.6-28.2-22.6-40.2-9-12-19.6-22.6-31.6-31.6-12-9-27-16-40.2-22.6-13.2-6.6-28.2-13.6-40.2-22.6-12-9-22.6-19.6-31.6-31.6-9-12-16-27-22.6-40.2-6.6-13.2-13.6-28.2-22.6-40.2-9-12-19.6-22.6-31.6-31.6-12-9-27-16-40.2-22.6-13.2-6.6-28.2-13.6-40.2-22.6-12-9-22.6-19.6-31.6-31.6-9-12-16-27-22.6-40.2-6.6-13.2-13.6-28.2-22.6-40.2-9-12-19.6-22.6-31.6-31.6-12-9-27-16-40.2-22.6-13.2-6.6-28.2-13.6-40.2-22.6-12-9-22.6-19.6-31.6-31.6-9-12-16-27-22.6-40.2-6.6-13.2-13.6-28.2-22.6-40.2-9-12-19.6-22.6-31.6-31.6-12-9-27-16-40.2-22.6-13.2-6.6-28.2-13.6-40.2-22.6-12-9-22.6-19.6-31.6-31.6-9-12-16-27-22.6-40.2-6.6-13.2-13.6-28.2-22.6-40.2-9-12-19.6-22.6-31.6-31.6-12-9-27-16-40.2-22.6-13.2-6.6-28.2-13.6-40.2-22.6-12-9-22.6-19.6-31.6-31.6-9-12-16-27-22.6-40.2-6.6-13.2-13.6-28.2-22.6-40.2-9-12-19.6-22.6-31.6-31.6-12-9-27-16-40.2-22.6-13.2-6.6-28.2-13.6-40.2-22.6-12-9-22.6-19.6-31.6-31.6-9-12-16-27-22.6-40.2-6.6-13.2-13.6-28.2-22.6-40.2-9-12-19.6-22.6-31.6-31.6-12-9-27-16-40.2-22.6-13.2-6.6-28.2-13.6-40.2-22.6-12-9-22.6-19.6-31.6-31.6-9-12-16-27-22.6-40.2-6.6-13.2-13.6-28.2-22.6-40.2-9-12-19.6-22.6-31.6-31.6-12-9-27-16-40.2-22.6-13.2-6.6-28.2-13.6-40.2-22.6-12-9-22.6-19.6-31.6-31.6-9-12-16-27-22.6-40.2-6.6-13.2-13.6-28.2-22.6-40.2-9-12-19.6-22.6-31.6-31.6-12-9-27-16-40.2-22.6-13.2-6.6-28.2-13.6-40.2-22.6-12-9-22.6-19.6-31.6-31.6-9-12-16-27-22.6-40.2-6.6-13.2-13.6-28.2-22.6-40.2-9-12-19.6-22.6-31.6-31.6z"/></svg>
+        </a>
+        
+    </div>
+</footer>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+        }
+    </script>
+
+
+</body>
+</html>

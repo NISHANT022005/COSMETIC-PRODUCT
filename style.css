@@ -1,0 +1,360 @@
+/* ...existing code... */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fff;
+    color: #222;
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+}
+.dark-theme {
+    background: #222;
+    color: #fff;
+}
+.toggle-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+.circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #eee;
+    border: 2px solid #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: background 0.3s, border 0.3s;
+}
+.dark-theme .circle {
+    background: #444;
+    border: 2px solid #fff;
+}
+header {
+    background: linear-gradient(90deg, #f8b6d2 0%, #f6e7fa 100%);
+    padding: 40px 0 20px 0;
+    text-align: center;
+}
+.dark-theme header {
+    background: linear-gradient(90deg, #3a2c3a 0%, #222 100%);
+}
+.logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #d72660;
+    letter-spacing: 2px;
+    font-family: 'Segoe Script', cursive, Arial, sans-serif;
+}
+nav {
+    margin-top: 20px;
+}
+nav a {
+    color: #d72660;
+    text-decoration: none;
+    margin: 0 18px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+nav a:hover {
+    color: #222;
+}
+.dark-theme nav a {
+    color: #f8b6d2;
+}
+.dark-theme nav a:hover {
+    color: #fff;
+}
+.hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 10px 30px 10px;
+    background: #fff;
+}
+.dark-theme .hero {
+    background: #222;
+}
+.hero-text {
+    max-width: 500px;
+    margin-right: 40px;
+}
+.hero-title {
+    font-size: 2.5rem;
+    color: #d72660;
+    margin-bottom: 18px;
+    font-family: 'Segoe Script', cursive, Arial, sans-serif;
+}
+.hero-desc {
+    font-size: 1.2rem;
+    margin-bottom: 28px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+.cta-btn {
+    background: #d72660;
+    color: #fff;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(215,38,96,0.15);
+    transition: background 0.2s;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+.cta-btn:hover {
+    background: #a81e4d;
+}
+.hero-img {
+    max-width: 320px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(215,38,96,0.10);
+}
+.products-section {
+    padding: 40px 10px 60px 10px;
+    background: #f6e7fa;
+    text-align: center;
+}
+.dark-theme .products-section {
+    background: #2d2233;
+}
+.products-title {
+    font-size: 2rem;
+    color: #d72660;
+    margin-bottom: 30px;
+    font-family: 'Segoe Script', cursive, Arial, sans-serif;
+}
+.products-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+.product-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    width: 220px;
+    padding: 22px 16px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+.product-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(215,38,96,0.13);
+}
+.product-img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 14px;
+    border: 2px solid #f8b6d2;
+}
+.product-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #d72660;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+.product-desc {
+    font-size: 0.98rem;
+    color: #555;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+.product-price {
+    font-size: 1.05rem;
+    color: #222;
+    font-weight: bold;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+.dark-theme .product-card {
+    background: #3a2c3a;
+    color: #fff;
+}
+.dark-theme .product-name {
+    color: #f8b6d2;
+}
+.dark-theme .product-desc {
+    color: #e0cbe6;
+}
+.dark-theme .product-price {
+    color: #fff;
+}
+footer {
+    background: #d72660;
+    color: #fff;
+    text-align: center;
+    padding: 18px 0;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+footer a {
+    transition: color 0.2s;
+}
+footer a:hover {
+    color: #fff700;
+}
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-text {
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+}
+@media (max-width: 600px) {
+    .products-grid {
+        flex-direction: column;
+        gap: 18px;
+    }
+    .product-card {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+/*..existing code... */
+
+
+.login-icon-btn {
+    position: absolute;
+    top: 20px;
+    left: 70px; /* Adjust as needed to fit your header layout */
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 30;
+    padding: 0;
+}
+.login-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #d72660;
+    transition: background 0.3s, border 0.3s;
+}
+.login-icon-btn:hover .login-circle {
+    background: #f8b6d2;
+    border-color: #a81e4d;
+}
+.dark-theme .login-circle {
+    background: #222;
+    border: 2px solid #f8b6d2;
+}
+.login-icon {
+    width: 24px;
+    height: 24px;
+    fill: #d72660;
+    transition: fill 0.3s;
+}
+.login-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+.login-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #d72660;
+    transition: background 0.3s, border 0.3s;
+}
+.login-icon-btn:hover .login-circle {
+    background: #f8b6d2;
+    border-color: #a81e4d;
+}
+.dark-theme .login-circle {
+    background: #222;
+    border: 2px solid #f8b6d2;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background: #fff;
+    margin: 8% auto;
+    padding: 30px 24px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    position: relative;
+}
+.modal-content h2 {
+    margin-top: 0;
+    color: #d72660;
+}
+.modal-content input[type="text"],
+.modal-content input[type="password"],
+.modal-content input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 18px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+}
+.modal-content button {
+    background: #d72660;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.modal-content .close {
+    position: absolute;
+    top: 10px; right: 18px;
+    font-size: 1.5em;
+    color: #d72660;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+.modal-content .switch-link {
+    color: #d72660;
+    cursor: pointer;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    font-size: 0.98em;
+}
