@@ -1,20 +1,12 @@
-# media-typer
+# finalhandler
 
-[![NPM Version][npm-version-image]][npm-url]
-[![NPM Downloads][npm-downloads-image]][npm-url]
-[![Node.js Version][node-version-image]][node-version-url]
-[![Build Status][travis-image]][travis-url]
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![Node.js Version][node-image]][node-url]
+[![Build Status][github-actions-ci-image]][github-actions-ci-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
-Simple RFC 6838 media type parser.
-
-This module will parse a given media type into it's component parts, like type,
-subtype, and suffix. A formatter is also provided to put them back together and
-the two can be combined to normalize media types into a canonical form.
-
-If you are looking to parse the string that represents a media type and it's
-parameters in HTTP (for example, the `Content-Type` header), use the
-[content-type module](https://www.npmjs.com/package/content-type).
+Node.js function to invoke as the final step to respond to HTTP request.
 
 ## Installation
 
@@ -23,71 +15,133 @@ This is a [Node.js](https://nodejs.org/en/) module available through the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
 ```sh
-$ npm install media-typer
+$ npm install finalhandler
 ```
 
 ## API
 
-<!-- eslint-disable no-unused-vars -->
-
 ```js
-var typer = require('media-typer')
+var finalhandler = require('finalhandler')
 ```
 
-### typer.parse(string)
+### finalhandler(req, res, [options])
 
-<!-- eslint-disable no-undef, no-unused-vars -->
+Returns function to be invoked as the final step for the given `req` and `res`.
+This function is to be invoked as `fn(err)`. If `err` is falsy, the handler will
+write out a 404 response to the `res`. If it is truthy, an error response will
+be written out to the `res` or `res` will be terminated if a response has already
+started.
 
-```js
-var obj = typer.parse('image/svg+xml')
-```
+When an error is written, the following information is added to the response:
 
-Parse a media type string. This will return an object with the following
-properties (examples are shown for the string `'image/svg+xml; charset=utf-8'`):
+  * The `res.statusCode` is set from `err.status` (or `err.statusCode`). If
+    this value is outside the 4xx or 5xx range, it will be set to 500.
+  * The `res.statusMessage` is set according to the status code.
+  * The body will be the HTML of the status code message if `env` is
+    `'production'`, otherwise will be `err.stack`.
+  * Any headers specified in an `err.headers` object.
 
- - `type`: The type of the media type (always lower case). Example: `'image'`
+The final handler will also unpipe anything from `req` when it is invoked.
 
- - `subtype`: The subtype of the media type (always lower case). Example: `'svg'`
+#### options.env
 
- - `suffix`: The suffix of the media type (always lower case). Example: `'xml'`
+By default, the environment is determined by `NODE_ENV` variable, but it can be
+overridden by this option.
 
-If the given type string is invalid, then a `TypeError` is thrown.
+#### options.onerror
 
-### typer.format(obj)
+Provide a function to be called with the `err` when it exists. Can be used for
+writing errors to a central location without excessive function generation. Called
+as `onerror(err, req, res)`.
 
-<!-- eslint-disable no-undef, no-unused-vars -->
+## Examples
 
-```js
-var obj = typer.format({ type: 'image', subtype: 'svg', suffix: 'xml' })
-```
-
-Format an object into a media type string. This will return a string of the
-mime type for the given object. For the properties of the object, see the
-documentation for `typer.parse(string)`.
-
-If any of the given object values are invalid, then a `TypeError` is thrown.
-
-### typer.test(string)
-
-<!-- eslint-disable no-undef, no-unused-vars -->
+### always 404
 
 ```js
-var valid = typer.test('image/svg+xml')
+var finalhandler = require('finalhandler')
+var http = require('http')
+
+var server = http.createServer(function (req, res) {
+  var done = finalhandler(req, res)
+  done()
+})
+
+server.listen(3000)
 ```
 
-Validate a media type string. This will return `true` is the string is a well-
-formatted media type, or `false` otherwise.
+### perform simple action
+
+```js
+var finalhandler = require('finalhandler')
+var fs = require('fs')
+var http = require('http')
+
+var server = http.createServer(function (req, res) {
+  var done = finalhandler(req, res)
+
+  fs.readFile('index.html', function (err, buf) {
+    if (err) return done(err)
+    res.setHeader('Content-Type', 'text/html')
+    res.end(buf)
+  })
+})
+
+server.listen(3000)
+```
+
+### use with middleware-style functions
+
+```js
+var finalhandler = require('finalhandler')
+var http = require('http')
+var serveStatic = require('serve-static')
+
+var serve = serveStatic('public')
+
+var server = http.createServer(function (req, res) {
+  var done = finalhandler(req, res)
+  serve(req, res, done)
+})
+
+server.listen(3000)
+```
+
+### keep log of all errors
+
+```js
+var finalhandler = require('finalhandler')
+var fs = require('fs')
+var http = require('http')
+
+var server = http.createServer(function (req, res) {
+  var done = finalhandler(req, res, { onerror: logerror })
+
+  fs.readFile('index.html', function (err, buf) {
+    if (err) return done(err)
+    res.setHeader('Content-Type', 'text/html')
+    res.end(buf)
+  })
+})
+
+server.listen(3000)
+
+function logerror (err) {
+  console.error(err.stack || err.toString())
+}
+```
 
 ## License
 
 [MIT](LICENSE)
 
-[coveralls-image]: https://badgen.net/coveralls/c/github/jshttp/media-typer/master
-[coveralls-url]: https://coveralls.io/r/jshttp/media-typer?branch=master
-[node-version-image]: https://badgen.net/npm/node/media-typer
-[node-version-url]: https://nodejs.org/en/download
-[npm-downloads-image]: https://badgen.net/npm/dm/media-typer
-[npm-url]: https://npmjs.org/package/media-typer
-[npm-version-image]: https://badgen.net/npm/v/media-typer
-[travis-image]: https://badgen.net/travis/jshttp/media-typer/master
-[travis-url]: https://travis-ci.org/jshttp/media-typer
+[npm-image]: https://img.shields.io/npm/v/finalhandler.svg
+[npm-url]: https://npmjs.org/package/finalhandler
+[node-image]: https://img.shields.io/node/v/finalhandler.svg
+[node-url]: https://nodejs.org/en/download
+[coveralls-image]: https://img.shields.io/coveralls/pillarjs/finalhandler.svg
+[coveralls-url]: https://coveralls.io/r/pillarjs/finalhandler?branch=master
+[downloads-image]: https://img.shields.io/npm/dm/finalhandler.svg
+[downloads-url]: https://npmjs.org/package/finalhandler
+[github-actions-ci-image]: https://github.com/pillarjs/finalhandler/actions/workflows/ci.yml/badge.svg
+[github-actions-ci-url]: https://github.com/pillarjs/finalhandler/actions/workflows/ci.yml
