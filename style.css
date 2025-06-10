@@ -75,6 +75,41 @@ nav a:hover {
 .dark-theme nav a:hover {
     color: #fff;
 }
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0; top: 0; width: 100%; height: 100%;
+    overflow: auto;
+    background: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background: #fff;
+    margin: 10% auto;
+    padding: 30px 24px 24px 24px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 350px;
+    position: relative;
+}
+.close {
+    position: absolute;
+    right: 18px; top: 10px;
+    background: none;
+    border: none;
+    font-size: 1.6em;
+    color: #d72660;
+    cursor: pointer;
+}
+.switch-link {
+    background: none;
+    border: none;
+    color: #d72660;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 10px;
+    display: block;
+}
 .hero {
     display: flex;
     flex-wrap: wrap;
